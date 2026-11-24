@@ -59,6 +59,13 @@ void Error_Handler(void);
 /* Private defines -----------------------------------------------------------*/
 #define LED_Pin GPIO_PIN_13
 #define LED_GPIO_Port GPIOC
+#define Sensor_CS_Pin GPIO_PIN_4
+#define Sensor_CS_GPIO_Port GPIOA
+#define Sensor_Reset_Pin GPIO_PIN_0
+#define Sensor_Reset_GPIO_Port GPIOB
+#define Sensor_Motion_Pin GPIO_PIN_1
+#define Sensor_Motion_GPIO_Port GPIOB
+#define Sensor_Motion_EXTI_IRQn EXTI1_IRQn
 
 /* USER CODE BEGIN Private defines */
 

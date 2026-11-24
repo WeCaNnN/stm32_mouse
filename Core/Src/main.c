@@ -18,6 +18,7 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "spi.h"
 #include "usb_device.h"
 #include "gpio.h"
 
@@ -32,6 +33,7 @@
 #include "SEGGER_RTT.h"   /* Error_Handler 里 elog 可能未初始化，需裸写 RTT */
 
 #include "usb_data_send.h"
+#include "sensor.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -156,9 +158,11 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_USB_DEVICE_Init();
+  MX_SPI1_Init();
   /* USER CODE BEGIN 2 */
   app_log_init();
   scheduler_reset();                    /* 清空任务表，主循环启动前只调一次 */
+  sensor_paw_3395_init();
   #if LED_PC13_TOGGLE_TEST
   scheduler_register(led_blink_task, LED_BLINK_INTERVAL_MS);
   #endif
