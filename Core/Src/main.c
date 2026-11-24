@@ -23,6 +23,11 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "user_config.h"
+/* 本文件日志标签：必须在 elog.h 之前定义，log_a/e/w/i/d/v 会自动带上它；
+ * 其他 .c 文件要打日志时，同样在 include elog.h 之前定义各自的 LOG_TAG */
+#define LOG_TAG     "main"
+#include <elog.h>
+#include "SEGGER_RTT.h"   /* Error_Handler 里 elog 可能未初始化，需裸写 RTT */
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -34,6 +39,10 @@
 /* USER CODE BEGIN PD */
 /* LED 翻转间隔(ms)：亮、灭各占一个间隔，完整闪烁周期是它的 2 倍 */
 #define LED_BLINK_INTERVAL_MS 500U
+
+/* 日志前缀格式（elog_set_fmt 用）：不带 [ ] 时间/进程/线程外壳 */
+#define LOG_FMT_WITH_LINE (ELOG_FMT_LVL | ELOG_FMT_TAG | ELOG_FMT_LINE)  /* A/E/D/V：级别+标签+行号 */
+#define LOG_FMT_SHORT     (ELOG_FMT_LVL | ELOG_FMT_TAG)                  /* I/W：仅级别+标签 */
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -55,6 +64,46 @@ void SystemClock_Config(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+
+/**
+ * @brief 日志链路自检：逐级输出一行，覆盖全部 5 个日志级别
+ *
+ * 开机调用一次，RTT Viewer 里 6 行全可见（含配色）说明 RTT+EasyLogger 链路正常；
+ * 由 APP/user_config.h 的 SELF_TEST_LOG 控制是否编译。
+ */
+static void log_self_test(void)
+{
+  log_v("boot: RTT + EasyLogger chain test start");
+  log_d("SYSCLK=72MHz (HSE 8M x PLL9), APB1=36MHz");
+  log_i("EasyLogger -> SEGGER RTT ch0");
+  log_w("WARN level sample: lvl+tag prefix only");
+  log_e("ERROR level sample: full-field prefix");
+  log_a("ASSERT level sample: all 5 levels visible means RTT OK");
+}
+
+/**
+ * @brief 初始化 EasyLogger 日志框架（输出后端为 SEGGER RTT 通道 0，见 elog_port.c）
+ *
+ * 各级别的输出格式：A/E/D/V 带行号，I/W 仅级别+标签；各级都不带 [ ] 时间/进程/线程
+ * 外壳——定位问题靠行号，行号在 Keil 里可直接跳转
+ */
+static void app_log_init(void)
+{
+    elog_init();
+
+    /* 各级别日志输出格式 */
+    elog_set_fmt(ELOG_LVL_ASSERT,  LOG_FMT_WITH_LINE);
+    elog_set_fmt(ELOG_LVL_ERROR,   LOG_FMT_WITH_LINE);
+    elog_set_fmt(ELOG_LVL_WARN,    LOG_FMT_SHORT);
+    elog_set_fmt(ELOG_LVL_INFO,    LOG_FMT_SHORT);
+    elog_set_fmt(ELOG_LVL_DEBUG,   LOG_FMT_WITH_LINE);
+    elog_set_fmt(ELOG_LVL_VERBOSE, LOG_FMT_WITH_LINE);
+    elog_start();
+
+    #if SELF_TEST_LOG
+    log_self_test();
+    #endif
+}
 
 /* USER CODE END 0 */
 
@@ -88,7 +137,7 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   /* USER CODE BEGIN 2 */
-
+  app_log_init();
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -156,7 +205,7 @@ void SystemClock_Config(void)
 void Error_Handler(void)
 {
   /* USER CODE BEGIN Error_Handler_Debug */
-  /* User can add his own implementation to report the HAL error return state */
+  SEGGER_RTT_WriteString(0, "E/HAL: Error_Handler entered, clock/periph init failed\n");
   __disable_irq();
   while (1)
   {
