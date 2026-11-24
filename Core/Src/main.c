@@ -24,6 +24,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "user_config.h"
+#include "scheduler.h"
 /* 本文件日志标签：必须在 elog.h 之前定义，log_a/e/w/i/d/v 会自动带上它；
  * 其他 .c 文件要打日志时，同样在 include elog.h 之前定义各自的 LOG_TAG */
 #define LOG_TAG     "main"
@@ -108,6 +109,19 @@ static void app_log_init(void)
     #endif
 }
 
+#if LED_PC13_TOGGLE_TEST
+/**
+ * @brief PC13 LED 闪烁任务：翻转一次 PC13 电平
+ *
+ * 由调度器每 LED_BLINK_INTERVAL_MS 毫秒调用一次（亮、灭各占一个间隔）；
+ * 主循环里还有其他任务要跑，任务内禁止延时。
+ */
+static void led_blink_task(void)
+{
+  HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
+}
+#endif
+
 /* USER CODE END 0 */
 
 /**
@@ -142,6 +156,10 @@ int main(void)
   MX_USB_DEVICE_Init();
   /* USER CODE BEGIN 2 */
   app_log_init();
+  scheduler_reset();                    /* 清空任务表，主循环启动前只调一次 */
+  #if LED_PC13_TOGGLE_TEST
+  scheduler_register(led_blink_task, LED_BLINK_INTERVAL_MS);
+  #endif
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -151,10 +169,7 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-    #if LED_PC13_TOGGLE_TEST
-    HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
-    HAL_Delay(LED_BLINK_INTERVAL_MS);
-    #endif
+    scheduler_run();                    /* 轮询执行到期的调度器任务 */
   }
   /* USER CODE END 3 */
 }
