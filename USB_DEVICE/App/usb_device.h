@@ -51,7 +51,7 @@
 
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN PV */
-
+extern USBD_HandleTypeDef hUsbDeviceFS;   /* USB设备句柄：定义于usb_device.c，发送报文时引用 */
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/

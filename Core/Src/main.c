@@ -30,6 +30,8 @@
 #define LOG_TAG     "main"
 #include <elog.h>
 #include "SEGGER_RTT.h"   /* Error_Handler 里 elog 可能未初始化，需裸写 RTT */
+
+#include "usb_data_send.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -160,6 +162,7 @@ int main(void)
   #if LED_PC13_TOGGLE_TEST
   scheduler_register(led_blink_task, LED_BLINK_INTERVAL_MS);
   #endif
+  scheduler_register(mouse_report_task, 1);
   /* USER CODE END 2 */
 
   /* Infinite loop */

@@ -6,6 +6,7 @@
 
 #define SELF_TEST_LOG 0 //easylog + rtt 自测
 
+#define USB_MOUSE_INTERFACE_TEST 0
 
 //usb 描述符配置管理
 #define MY_VID  0x0483
