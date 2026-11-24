@@ -3,7 +3,7 @@
 
 #include <stdint.h>
 
-/* ===== 串口协议地址字节格式（手册 5.4/5.5）===== */
+/* ===== 串口协议地址字节格式===== */
 #define PIXART_ADDR_WRITE_BIT   0x80U   /* 地址字节 bit7：1=写方向，0=读方向 */
 #define PIXART_ADDR_READ_MASK   0x7FU   /* 方向位掩码：清 bit7 得 7 位纯地址 */
 
@@ -18,6 +18,10 @@
 /* ===== 限制 ===== */
 #define PIXART_T_TIMEOUT        10   /* SPI 传输超时，单位 ms：12 字节 @9MHz 实际 ~11µs，百倍余量 */
 #define PIXART_SEQ_READ_MAX_LEN 12   /* 连续读长度上限：Motion Burst 报文 BYTE[0]~[11] */
+
+#define SENSOR_CS_LOW   HAL_GPIO_WritePin(Sensor_CS_GPIO_Port, Sensor_CS_Pin, GPIO_PIN_RESET)
+#define SENSOR_CS_HIGH  HAL_GPIO_WritePin(Sensor_CS_GPIO_Port, Sensor_CS_Pin, GPIO_PIN_SET)
+
 
 void    pixart_port_init(void);
 void    pixart_reg_write(uint8_t addr, uint8_t value);

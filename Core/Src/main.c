@@ -164,7 +164,12 @@ int main(void)
   delay_init();
   app_log_init();
   scheduler_reset();                    /* 清空任务表，主循环启动前只调一次 */
-  sensor_paw_3395_init();
+  if (sensor_paw_3395_init() == false)
+  {
+    #if SENSOR_INIT_DEBUG
+    log_e("sensor init failed, mouse degraded to keys/wheel only");
+    #endif
+  }
   #if LED_PC13_TOGGLE_TEST
   scheduler_register(led_blink_task, LED_BLINK_INTERVAL_MS);
   #endif

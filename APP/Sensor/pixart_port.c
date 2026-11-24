@@ -8,8 +8,6 @@
 #define LOG_TAG     "pixart_port"
 #include <elog.h>
 
-#define SENSOR_CS_LOW   HAL_GPIO_WritePin(Sensor_CS_GPIO_Port, Sensor_CS_Pin, GPIO_PIN_RESET)
-#define SENSOR_CS_HIGH  HAL_GPIO_WritePin(Sensor_CS_GPIO_Port, Sensor_CS_Pin, GPIO_PIN_SET)
 
 /**
  * @brief 初始化传输层：CS 收回总线空闲态
