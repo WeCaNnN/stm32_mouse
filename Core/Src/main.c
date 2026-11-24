@@ -34,6 +34,7 @@
 
 #include "usb_data_send.h"
 #include "sensor.h"
+#include "delay.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -160,6 +161,7 @@ int main(void)
   MX_USB_DEVICE_Init();
   MX_SPI1_Init();
   /* USER CODE BEGIN 2 */
+  delay_init();
   app_log_init();
   scheduler_reset();                    /* 清空任务表，主循环启动前只调一次 */
   sensor_paw_3395_init();

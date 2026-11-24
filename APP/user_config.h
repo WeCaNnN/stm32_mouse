@@ -8,6 +8,10 @@
 
 #define USB_MOUSE_INTERFACE_TEST 0
 
+#define PIXART_PORT_DEBUG   0
+
+#define SENSOR_INIT_DEBUG 0
+
 //usb 描述符配置管理
 #define MY_VID  0x0483
 #define MY_PID  0x1234

@@ -339,7 +339,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32F103xB</Define>
               <Undefine></Undefine>
-              <IncludePath>../Core/Inc;../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy;../Drivers/STM32F1xx_HAL_Driver/Inc;../Drivers/CMSIS/Device/ST/STM32F1xx/Include;../Drivers/CMSIS/Include;../APP;../Middlewares/scheduler;../Middlewares/SEGGER_RTT;../Middlewares/easylogger/inc;../Middlewares/easylogger/src;../Middlewares/easylogger/port;../USB_DEVICE/App;../USB_DEVICE/Target;../Middlewares/ST/STM32_USB_Device_Library/Core/Inc;../Middlewares/ST/STM32_USB_Device_Library/Class/HID/Inc;../APP/usb_interface;..\APP\Sensor</IncludePath>
+              <IncludePath>../Core/Inc;../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy;../Drivers/STM32F1xx_HAL_Driver/Inc;../Drivers/CMSIS/Device/ST/STM32F1xx/Include;../Drivers/CMSIS/Include;../APP;../Middlewares/scheduler;../Middlewares/SEGGER_RTT;../Middlewares/easylogger/inc;../Middlewares/easylogger/src;../Middlewares/easylogger/port;../USB_DEVICE/App;../USB_DEVICE/Target;../Middlewares/ST/STM32_USB_Device_Library/Core/Inc;../Middlewares/ST/STM32_USB_Device_Library/Class/HID/Inc;../APP/usb_interface;..\APP\Sensor;../Middlewares/delay</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -782,6 +782,21 @@
               <FileName>paw3395.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\APP\Sensor\paw3395.c</FilePath>
+            </File>
+            <File>
+              <FileName>pixart_port.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\APP\Sensor\pixart_port.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Middlewares/delay</GroupName>
+          <Files>
+            <File>
+              <FileName>delay.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../Middlewares/delay/delay.c</FilePath>
             </File>
           </Files>
         </Group>
