@@ -1,0 +1,8 @@
+# Keil 编译产物和个人配置（本文件只对 MyProject_Mouse 目录生效）
+MDK-ARM/MyProject_Mouse/
+MDK-ARM/*.uvguix.*
+MDK-ARM/*.lst
+MDK-ARM/build_log.txt
+MDK-ARM/JLinkLog.txt
+MDK-ARM/JLinkSettings.ini
+*.bak
