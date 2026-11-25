@@ -15,5 +15,7 @@
 #define PAW3395_ID_INV_VAL          0xAEU  /* Inverse ID 期望值 = ~0x51 */
 
 bool sensor_paw_3395_init(void);
-
+void sensor_motion_task(void);
+void sensor_XY_data_get(int16_t *pX, int16_t *pY);
+void sensor_XY_data_acc(int16_t lastX, int16_t lastY);
 #endif

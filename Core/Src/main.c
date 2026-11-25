@@ -173,6 +173,7 @@ int main(void)
   #if LED_PC13_TOGGLE_TEST
   scheduler_register(led_blink_task, LED_BLINK_INTERVAL_MS);
   #endif
+  scheduler_register(sensor_motion_task, 1);
   scheduler_register(mouse_report_task, 1);
   /* USER CODE END 2 */
 

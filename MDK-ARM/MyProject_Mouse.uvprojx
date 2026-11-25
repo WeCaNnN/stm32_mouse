@@ -788,6 +788,11 @@
               <FileType>1</FileType>
               <FilePath>..\APP\Sensor\pixart_port.c</FilePath>
             </File>
+            <File>
+              <FileName>sensor.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\APP\Sensor\sensor.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
