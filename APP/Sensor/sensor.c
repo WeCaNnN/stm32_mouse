@@ -74,3 +74,21 @@ void sensor_XY_data_acc(int16_t lastX, int16_t lastY)
     acc_x = acc_x + lastX;
     acc_y = acc_y + lastY;
 }
+
+/**
+ * @brief 设置mouse dpi
+ */
+void sensor_dpi_config(uint16_t dpi)
+{
+    uint16_t dpi_temp = 0;
+
+    if((dpi < DPI_MIN) || (dpi >DPI_MAX))
+    {
+        dpi = (dpi < DPI_MIN)?DPI_MIN:DPI_MAX;
+    }
+    dpi_temp = (dpi - 50) / 50;
+    pixart_reg_write(PAW3395_MOTION_CTRL, PAW3395_RES_MOD_SHARED);
+    pixart_reg_write(PAW3395_RESOLUTION_X_LOW,dpi_temp & 0xff);
+    pixart_reg_write(PAW3395_RESOLUTION_X_HIGH,dpi_temp >> 8);
+    pixart_reg_write(PAW3395_SET_RESOLUTION, PAW3395_RESOLUTION_APPLY); 
+}

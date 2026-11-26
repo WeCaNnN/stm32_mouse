@@ -21,4 +21,8 @@
 #define MY_PID  0x1234
 #define MY_DEVICE_NAME  "Gameing Mouse"
 
+//mouse 参数宏
+
+#define DEFAULT_DPI 1200
+
 #endif

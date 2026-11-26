@@ -339,7 +339,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32F103xB</Define>
               <Undefine></Undefine>
-              <IncludePath>../Core/Inc;../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy;../Drivers/STM32F1xx_HAL_Driver/Inc;../Drivers/CMSIS/Device/ST/STM32F1xx/Include;../Drivers/CMSIS/Include;../APP;../Middlewares/scheduler;../Middlewares/SEGGER_RTT;../Middlewares/easylogger/inc;../Middlewares/easylogger/src;../Middlewares/easylogger/port;../USB_DEVICE/App;../USB_DEVICE/Target;../Middlewares/ST/STM32_USB_Device_Library/Core/Inc;../Middlewares/ST/STM32_USB_Device_Library/Class/HID/Inc;../APP/usb_interface;..\APP\Sensor;../Middlewares/delay</IncludePath>
+              <IncludePath>../Core/Inc;../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy;../Drivers/STM32F1xx_HAL_Driver/Inc;../Drivers/CMSIS/Device/ST/STM32F1xx/Include;../Drivers/CMSIS/Include;../APP;../Middlewares/scheduler;../Middlewares/SEGGER_RTT;../Middlewares/easylogger/inc;../Middlewares/easylogger/src;../Middlewares/easylogger/port;../USB_DEVICE/App;../USB_DEVICE/Target;../Middlewares/ST/STM32_USB_Device_Library/Core/Inc;../Middlewares/ST/STM32_USB_Device_Library/Class/HID/Inc;../APP/usb_interface;..\APP\Sensor;../Middlewares/delay;..\APP\profile</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -792,6 +792,11 @@
               <FileName>sensor.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\APP\Sensor\sensor.c</FilePath>
+            </File>
+            <File>
+              <FileName>profile.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\APP\profile\profile.c</FilePath>
             </File>
           </Files>
         </Group>
